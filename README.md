@@ -5,7 +5,7 @@ This program will be trained to maximize testing accuracy.
 
 ## Installation
 Clone Project and 
-run ```pipenv sync```
+run ```pipenv install``` and ```pipenv sync```
 
 
 ## Run
