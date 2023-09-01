@@ -1,0 +1,12 @@
+What are the requirements
+1. Create a base model
+2. Change activation function one by one and store each new model
+3. Store metrics for each model and store the best performing models
+4. Train the best performing model with additional epochs
+5. Store each model and their data
+
+
+Create three different classes.
+1. Data - Stores and processes any data
+2. Model - Creates and stores models and their metrics
+3. Store_Models - Stores models and best performing models
