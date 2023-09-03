@@ -9,9 +9,10 @@ This program will be trained to maximize testing accuracy.
 
 ## Installation
 1. Clone Project
-2. run ```pipenv install```
-3. run ```pipenv sync```
-
+2. Get images from https://www.kaggle.com/datasets/alessiocorrado99/animals10
+3. Rename image folders to English versions of the animal names
+4. run ```pipenv install``` and ```pipenv sync```
+5. Create folders for logs, models and results
 
 ## Run
 python main.py
