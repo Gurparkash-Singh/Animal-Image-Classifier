@@ -191,8 +191,8 @@ class Models:
             "loss": None,
             "average": None
         }
-        self.epoch = 2
-        self.best_epoch = 2
+        self.epoch = epoch
+        self.best_epoch = best_epoch
         self.data = None
         self.models = []
         self.best_metric = None
@@ -240,26 +240,29 @@ class Models:
                         self.best_metric = key
             self.write_metrics(file, "Best Models", self.best_models)
             if self.best_metric == None:
-                print("No Best Metric Selected")
-                return
-            self._create_best_model()
+                """
+                If no metric increases accuracy, select recall
+                """
+                self.best_metric = "recall"
+                print("Chose Recall")
+            self._create_best_model(file)
         return
     
-    def _create_best_model(self):
-        with open(f"./results/result.txt", "at") as file:
-            for i in len(self.models[0].activations):
-                activations = self.best_models[self.best_metric].activations
-                for function in ACTIVATION_FUNCTIONS:
-                    activations[i] = function
-                    model = Model(f"{function}_{i}", activations)
-                    model.train(self.data, self.epoch)
-                    self.models.append(model)
-                    self.write_metrics(file, model, model.calculations)
-                self._models_evaluate()
-                self.write_metrics(file, "Best Models", self.best_models)
+    def _create_best_model(self, file):
+        for i in range(len(self.models[0].activations)):
+            activations = self.best_models[self.best_metric].activations
+            for function in ACTIVATION_FUNCTIONS:
+                activations[i] = function
+                model = Model(f"{function}_{i}", activations)
+                model.train(self.data, self.epoch)
+                self.models.append(model)
+                self.write_metrics(file, model, model.calculations)
             self._models_evaluate()
-            self.best_models[self.best_metric].train(self.data, self.best_epoch)
             self.write_metrics(file, "Best Models", self.best_models)
+        self._models_evaluate()
+        self.best_models[self.best_metric].train(self.data, self.best_epoch)
+        self.write_metrics(file, "Best Models", self.best_models)
+        file.write(f"{self.best_models[self.best_metric].activations}")
         return
     
     def write_metrics(self, file, title, data):
@@ -296,4 +299,4 @@ class Models:
         return
     
 if __name__ == "__main__":
-    models = Models(2, 2)
+    models = Models(5, 15)
