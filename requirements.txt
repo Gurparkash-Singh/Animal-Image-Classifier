@@ -10,3 +10,13 @@ Create three different classes.
 1. Data - Stores and processes any data
 2. Model - Creates and stores models and their metrics
 3. Store_Models - Stores models and best performing models
+
+Fix evaluate metrics
+1. Check if models folder has any models
+2. When saving models, save all metrics
+3. Load models automatically with the proper prefix
+
+First Figure out the best activation function for the last piece
+then use that to do all calculations
+
+Add ability to resume from any place.
