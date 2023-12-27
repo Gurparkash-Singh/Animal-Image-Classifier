@@ -34,6 +34,7 @@ ACTIVATION_FUNCTIONS = [
     "tanh"
 ]
 
+@keras.saving.register_keras_serializable()
 class Model(keras.Sequential):
     def __init__(self, name, activations):
         super().__init__(name=name)
